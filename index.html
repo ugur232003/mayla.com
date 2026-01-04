@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Çoktan Seçmeli Test</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    background: white;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.secim {
+    background: #eee;
+}
+
+.dogru {
+    background: #4CAF50;
+    color: white;
+}
+
+.yanlis {
+    background: #F44336;
+    color: white;
+}
+
+#sonraki {
+    background: #2196F3;
+    color: white;
+    display: none;
+}
+
+#sonuc {
+    font-weight: bold;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2 id="soru"></h2>
+    <div id="secenekler"></div>
+    <p id="sonuc"></p>
+    <button id="sonraki" onclick="sonrakiSoru()">Sonraki Soru</button>
+</div>
+
+<script>
+const sorular = [
+    {
+        soru: "Türkiye'nin başkenti neresidir?",
+        secenekler: ["İstanbul", "Ankara", "İzmir", "Bursa"],
+        dogru: 1
+    },
+    {
+        soru: "Dünyanın uydusu hangisidir?",
+        secenekler: ["Mars", "Ay", "Güneş", "Venüs"],
+        dogru: 1
+    },
+    {
+        soru: "En büyük gezegen hangisidir?",
+        secenekler: ["Dünya", "Mars", "Jüpiter", "Satürn"],
+        dogru: 2
+    }
+];
+
+let soruIndex = 0;
+let puan = 0;
+let cevaplandi = false;
+
+function soruGoster() {
+    cevaplandi = false;
+    document.getElementById("sonuc").innerHTML = "";
+    document.getElementById("sonraki").style.display = "none";
+
+    const s = sorular[soruIndex];
+    document.getElementById("soru").innerHTML =
+        `${soruIndex + 1}) ${s.soru}`;
+
+    const seceneklerDiv = document.getElementById("secenekler");
+    seceneklerDiv.innerHTML = "";
+
+    s.secenekler.forEach((secenek, index) => {
+        const btn = document.createElement("button");
+        btn.className = "secim";
+        btn.innerHTML = secenek;
+        btn.onclick = () => cevapKontrol(index, btn);
+        seceneklerDiv.appendChild(btn);
+    });
+}
+
+function cevapKontrol(secim, btn) {
+    if (cevaplandi) return;
+    cevaplandi = true;
+
+    const dogruIndex = sorular[soruIndex].dogru;
+    const butonlar = document.querySelectorAll(".secim");
+
+    if (secim === dogruIndex) {
+        btn.classList.add("dogru");
+        document.getElementById("sonuc").innerHTML = "✅ Doğru!";
+        puan++;
+    } else {
+        btn.classList.add("yanlis");
+        butonlar[dogruIndex].classList.add("dogru");
+        document.getElementById("sonuc").innerHTML = "❌ Yanlış!";
+    }
+
+    document.getElementById("sonraki").style.display = "block";
+}
+
+function sonrakiSoru() {
+    soruIndex++;
+
+    if (soruIndex < sorular.length) {
+        soruGoster();
+    } else {
+        document.querySelector(".container").innerHTML = `
+            <h2>Test Bitti 🎉</h2>
+            <p>Puanın: <strong>${puan} / ${sorular.length}</strong></p>
+            <button onclick="location.reload()">Tekrar Çöz</button>
+        `;
+    }
+}
+
+soruGoster();
+</script>
+
+</body>
+</html>
