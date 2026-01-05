@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Çoktan Seçmeli Test</title>
+<title>MAYLA 💕 </title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    background: #f830a8;
     padding: 20px;
 }
 
@@ -62,6 +62,27 @@ button:hover {
     font-weight: bold;
     margin-top: 10px;
 }
+.final-foto {
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: zoomIn 1.5s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 </style>
 </head>
 
@@ -76,21 +97,65 @@ button:hover {
 
 <script>
 const sorular = [
+
     {
-        soru: "Türkiye'nin başkenti neresidir?",
-        secenekler: ["İstanbul", "Ankara", "İzmir", "Bursa"],
+        soru: "Ne zaman tanıştık?",
+        secenekler: ["9 Haziran", "10 Haziran", "11 Haziran", "12 Haziran"],
+        dogru: 2
+    },
+    {
+        soru: "Sevgili olduğumuz  Tarih?",
+        secenekler: ["15 Haziran", "16 Haziran", "17 Haziran", "18 Haziran"],
         dogru: 1
     },
     {
-        soru: "Dünyanın uydusu hangisidir?",
-        secenekler: ["Mars", "Ay", "Güneş", "Venüs"],
-        dogru: 1
-    },
+        soru: "Beraber yediğimiz ilk yemek?",
+        secenekler: ["Tavuk", "Pizza", "İskender ", "Hamburger"],
+        dogru: 0
+    }
+    ,
     {
-        soru: "En büyük gezegen hangisidir?",
-        secenekler: ["Dünya", "Mars", "Jüpiter", "Satürn"],
+        soru: "Birlikte izlediğimiz ilk dizi/film neydi?",
+        secenekler: ["Siccin 8", "Game Of Throens","Annabelle 4", "Yan Yana"],
+        dogru: 0
+    }
+    ,
+    {
+        soru: "Birlikte en çok ne yapmayı seviyoruz?",
+        secenekler: ["Oyun Oynamak", "Gezmek", "Yemek veya tatlı Yemek", "Film-Dizi izlemek"],
         dogru: 2
     }
+    ,
+    {
+        soru: "İlk birlikte gittiğimiz yer neresiydi?",
+        secenekler: ["Sinema", "Kafe", "Park"],
+        dogru: 1
+    }
+    ,
+    {
+        soru: "En Sevdiğimiz Oyun Aktivitesi?",
+        secenekler: ["Kill de Mini Figürler Yapmak ", "Boyama Yapmak", "Heykel Yamak", "Lego Yapmak"],
+        dogru: 3
+    }
+    ,
+    {
+        soru: "Birlikte en çok güldüğümüz an?",
+        secenekler: ["Benim erkek doğum demem", "Barışmak üzereyken kuşları kovalamam", "Buz patein de sürekkli düştüğüm zaman", "Hepsi ❤️ "],
+        dogru: 1
+    }
+    ,
+    {
+        soru: "Gelecekte birlikte en çok ne yapmak istiyoruz?",
+        secenekler: ["Seyahat etmek", "Aynı evde yaşamak", "Hayaller kurmak", "Hepsi ❤️"],
+        dogru: 3
+    }
+     ,
+    {
+        soru: "Birlikte ilk gitmek istediğimiz yer??",
+        secenekler: ["İtalya", "İspanya", "Sırbistan", "Makedonya"],
+        dogru: 2
+    }
+    
 ];
 
 let soruIndex = 0;
@@ -145,10 +210,21 @@ function sonrakiSoru() {
         soruGoster();
     } else {
         document.querySelector(".container").innerHTML = `
-            <h2>Test Bitti 🎉</h2>
-            <p>Puanın: <strong>${puan} / ${sorular.length}</strong></p>
-            <button onclick="location.reload()">Tekrar Çöz</button>
-        `;
+    <h2 class="fade">Test Bitti 🎉</h2>
+    <p class="fade">Puanın: <strong>${puan} / ${sorular.length}</strong></p>
+     <img src="foto.jpg" class="final-foto fade">
+
+    <div class="ozel-mesaj fade">
+        ❤️ Bu testin tek doğru cevabı sensin ❤️<br>
+        Seni çok seviyorum Sevgilim 💕
+    </div>
+
+    <button onclick="location.reload()">Tekrar Çöz</button>
+
+    <div class="kalpler"></div>
+`;
+kalpUcur();
+
     }
 }
 
